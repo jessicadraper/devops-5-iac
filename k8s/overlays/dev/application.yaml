@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: langy-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jessicadraper/devops-5-iac.git
+    path: k8s/overlays/dev
+    targetRevision: HEAD
+    kustomize:
+      namePrefix: dev-
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops5-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

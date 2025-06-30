@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: langy
-  namespace: devops5 
+  name: langy-prod
+  namespace: devops5-prod
 spec:
-  replicas: 1 # Number of pod replicas to run
+  replicas: 2 # Number of pod replicas to run
   selector:
     matchLabels:
-      app: langy
+      app: langy-prod
   template:
     metadata:
       labels:
-        app: langy
+        app: langy-prod
     spec:
       serviceAccountName: devops-sa
       containers:
-      - name: langy-container
+      - name: langy-container-prod
         image: ghcr.io/jessicadraper/langy:v1
         imagePullPolicy: Always
         resources:
