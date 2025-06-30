@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 80 # The port that the Service will expose inside the cluster
     targetPort: 5000 # The port on the pod (container) that traffic will be forwarded to
-    nodePort: 30090 # The port on the node that will proxy to the service port
+    nodePort: 30095 # The port on the node that will proxy to the service port
   selector:
     app: langy
