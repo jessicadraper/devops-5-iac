@@ -1,0 +1,77 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: pod-security
+  namespace: devops5
+spec:
+  validationFailureAction: enforce
+  background: true
+  rules:
+    - name: require-run-as-non-root
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "Containers must run as non-root."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  runAsNonRoot: true
+
+    - name: require-read-only-root
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "Containers must use a read-only root filesystem."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  readOnlyRootFilesystem: true
+
+    - name: disallow-privilege-escalation
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "Containers must not allow privilege escalation."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  allowPrivilegeEscalation: false
+
+    - name: drop-all-capabilities
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "Containers must drop all capabilities."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  capabilities:
+                    drop:
+                      - "ALL"
+
+    - name: block-latest-tag
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "Using the ':latest' image tag is not allowed. Please use a specific version."
+        foreach:
+          - list: "spec.containers"
+            deny:
+              conditions:
+                - key: "{{ element.image }}"
+                  operator: NotEquals
+                  value: "*:latest"

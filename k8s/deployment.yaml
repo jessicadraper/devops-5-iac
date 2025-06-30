@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: langy
+  namespace: devops5 
+spec:
+  replicas: 1 # Number of pod replicas to run
+  selector:
+    matchLabels:
+      app: langy
+  template:
+    metadata:
+      labels:
+        app: langy
+    spec:
+      serviceAccountName: devops-sa
+      containers:
+      - name: langy-container
+        image: ghcr.io/jessicadraper/langy:v1
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000 # Port exposed by the container (app listens here)
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+
