@@ -9,8 +9,6 @@ spec:
     repoURL: https://github.com/jessicadraper/devops-5-iac.git
     path: k8s/overlays/prod
     targetRevision: HEAD
-    kustomize:
-      namePrefix: prod-
   destination:
     server: https://kubernetes.default.svc
     namespace: devops5-prod
