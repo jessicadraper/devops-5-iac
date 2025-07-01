@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: langy-prod
-  namespace: devops5-prod
 spec:
   replicas: 2 # Number of pod replicas to run
   selector:
@@ -13,11 +12,9 @@ spec:
       labels:
         app: langy-prod
     spec:
-      serviceAccountName: devops-sa
       containers:
       - name: langy-container-prod
         image: ghcr.io/jessicadraper/langy:v1
-        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"
@@ -25,12 +22,14 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-        ports:
-        - containerPort: 5000 # Port exposed by the container (app listens here)
-        securityContext:
-          runAsNonRoot: true
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: langy-service-prod
+spec:
+  ports:
+    nodePort: 30095 # The port on the node that will proxy to the service port
+  selector:
+    app: langy-prod
 

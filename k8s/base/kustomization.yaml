@@ -1,3 +1,5 @@
 resources:
+- deployment.yaml
+- service.yaml
 - policies.yaml
 - service-account.yaml

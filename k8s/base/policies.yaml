@@ -2,7 +2,6 @@ apiVersion: kyverno.io/v1
 kind: Policy
 metadata:
   name: pod-security
-  namespace: devops5
 spec:
   validationFailureAction: enforce
   background: true

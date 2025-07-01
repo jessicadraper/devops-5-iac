@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: devops5-prod
-  labels:
-    name: devops5-prod
