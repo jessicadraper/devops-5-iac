@@ -1,0 +1,3 @@
+resources:
+  - dev/application.yaml
+  - prod/application.yaml
