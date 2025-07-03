@@ -13,7 +13,7 @@ spec:
         app: langy
     spec:
       containers:
-      - name: langy-container-prod
+      - name: langy-container
         image: ghcr.io/jessicadraper/langy:v1
         resources:
           requests:
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: langy-service-prod
+  name: langy-service
 spec:
   ports:
     nodePort: 30095 # The port on the node that will proxy to the service port

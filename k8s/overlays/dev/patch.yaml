@@ -1,21 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: langy
 spec:
   replicas: 1 # Number of pod replicas to run
-  selector:
-    matchLabels:
-      app: langy
   template:
-    metadata:
-      labels:
-        app: langy
     spec:
       containers:
-      - name: langy-container-dev
-        image: ghcr.io/jessicadraper/langy:v1
-        imagePullPolicy: Always
         resources:
           requests:
             memory: "32Mi"
@@ -26,11 +15,7 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata:
-  name: langy-service-dev
 spec:
   ports:
     nodePort: 30097 # The port on the node that will proxy to the service port
-  selector:
-    app: langy
 
