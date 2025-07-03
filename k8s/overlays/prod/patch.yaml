@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: langy
 spec:
-  replicas: 1 # Number of pod replicas to run
+  replicas: 2 # Number of pod replicas to run
   template:
     spec:
       containers:
