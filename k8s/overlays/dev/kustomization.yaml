@@ -1,7 +1,7 @@
 resources:
   - ../../base
 
-patches:
+patchesStrategicMerge:
   - patch.yaml
 
 namespace: devops5-dev
