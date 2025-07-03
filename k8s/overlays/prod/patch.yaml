@@ -28,6 +28,7 @@ kind: Service
 metadata:
   name: langy-service
 spec:
+  type: NodePort
   ports:
     nodePort: 30095 # The port on the node that will proxy to the service port
   selector:

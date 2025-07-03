@@ -1,5 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: langy
 spec:
   replicas: 1 # Number of pod replicas to run
   template:
@@ -15,7 +17,10 @@ spec:
 ---
 apiVersion: v1
 kind: Service
+metadata:
+  name: langy
 spec:
+  type: NodePort # Exposes the service on each node’s IP at a static port
   ports:
     nodePort: 30097 # The port on the node that will proxy to the service port
 
