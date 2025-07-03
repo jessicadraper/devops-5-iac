@@ -7,6 +7,7 @@ spec:
   template:
     spec:
       containers:
+      - name: langy-container
         resources:
           requests:
             memory: "32Mi"
@@ -18,9 +19,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: langy
+  name: langy-service
 spec:
-  type: NodePort # Exposes the service on each node’s IP at a static port
   ports:
-    nodePort: 30097 # The port on the node that will proxy to the service port
+  - port: 80 # The port that the Service will expose inside the cluster
+    nodePort: 30094 # The port on the node that will proxy to the service port
 

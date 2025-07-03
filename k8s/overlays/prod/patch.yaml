@@ -3,18 +3,11 @@ kind: Deployment
 metadata:
   name: langy
 spec:
-  replicas: 2 # Number of pod replicas to run
-  selector:
-    matchLabels:
-      app: langy
+  replicas: 1 # Number of pod replicas to run
   template:
-    metadata:
-      labels:
-        app: langy
     spec:
       containers:
       - name: langy-container
-        image: ghcr.io/jessicadraper/langy:v1
         resources:
           requests:
             memory: "64Mi"
@@ -28,9 +21,6 @@ kind: Service
 metadata:
   name: langy-service
 spec:
-  type: NodePort
   ports:
+  - port: 80 # The port that the Service will expose inside the cluster
     nodePort: 30095 # The port on the node that will proxy to the service port
-  selector:
-    app: langy
-
