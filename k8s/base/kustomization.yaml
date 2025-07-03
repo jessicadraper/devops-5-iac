@@ -3,4 +3,3 @@ resources:
 - service.yaml
 - policies.yaml
 - service-account.yaml
-- sealedsecret.yaml

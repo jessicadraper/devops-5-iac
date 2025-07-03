@@ -1,6 +1,7 @@
 resources:
   - ../../base
   - namespace.yaml
+  - sealedsecret.yaml
 
 patchesStrategicMerge:
   - patch.yaml
