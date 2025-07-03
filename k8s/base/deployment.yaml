@@ -32,4 +32,10 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop: ["ALL"]
+        env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: langy-secret  # name of the secret created by SealedSecret
+              key: API_KEY        # key inside the secret (matches your sealed secret data key)
 
