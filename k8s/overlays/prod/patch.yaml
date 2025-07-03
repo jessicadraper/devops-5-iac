@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: langy-prod
+  name: langy
 spec:
   replicas: 2 # Number of pod replicas to run
   selector:
     matchLabels:
-      app: langy-prod
+      app: langy
   template:
     metadata:
       labels:
-        app: langy-prod
+        app: langy
     spec:
       containers:
       - name: langy-container-prod
@@ -31,5 +31,5 @@ spec:
   ports:
     nodePort: 30095 # The port on the node that will proxy to the service port
   selector:
-    app: langy-prod
+    app: langy
 
