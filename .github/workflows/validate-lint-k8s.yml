@@ -1,0 +1,43 @@
+name: Validate and Lint Argo CD Application K8s Manifests Before Merge
+
+on:
+  pull_request:
+    branches: [ "main" ]
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+
+  validate-lint:
+    name: Validate and lint ArgoCD application build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+
+      - name: Prepare manifest output directory
+        run: mkdir -p output
+      
+      - name: Kustomize build for dev
+        run: |
+          kustomize build k8s/overlays/dev > output/dev.yaml
+          cat output/dev.yaml
+
+      - name: Kustomize build for prod
+        run: |
+          kustomize build k8s/overlays/prod > output/prod.yaml
+          cat output/prod.yaml
+          ls output
+
+      - name: Run kube-linter
+        uses: stackrox/kube-linter-action@v1
+        with:
+          directory: output
+
+      - name: Validate ArgoCD Applications
+        run: kustomize build k8s/overlays | grep kind | grep Application
