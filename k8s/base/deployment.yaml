@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: langy
 spec:
-  replicas: 2 # Number of pod replicas to run
+  replicas: 1 # Number of pod replicas to run
   selector:
     matchLabels:
       app: langy
@@ -15,7 +15,7 @@ spec:
       serviceAccountName: devops-sa
       containers:
       - name: langy-container
-        image: ghcr.io/jessicadraper/langy:v1
+        image: ghcr.io/jessicadraper/langy:latest
         imagePullPolicy: Always
         resources:
           requests:
