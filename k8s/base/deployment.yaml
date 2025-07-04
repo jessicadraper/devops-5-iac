@@ -38,16 +38,4 @@ spec:
             secretKeyRef:
               name: langy-secret  # name of the secret created by SealedSecret
               key: API_KEY        # key inside the secret (matches your sealed secret data key)
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchExpressions:
-                    - key: app
-                      operator: In
-                      values:
-                        - langy
-                topologyKey: kubernetes.io/hostname
 
