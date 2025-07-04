@@ -15,7 +15,7 @@ spec:
       serviceAccountName: devops-sa
       containers:
       - name: langy-container
-        image: ghcr.io/jessicadraper/langy:latest
+        image: ghcr.io/jessicadraper/langy:v1
         imagePullPolicy: Always
         resources:
           requests:
