@@ -17,7 +17,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install kustomize
-        run: sudo apt-get update && sudo apt-get install -y kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
       
       - name: Kustomize build for dev
         run: |
